@@ -19,37 +19,31 @@ dir_tree = {
     "Setup_Files": ['.exe', '.bin', '.cmd', '.msi', '.dmg']
 }
 
-
+# Event Hanlder Class
 class FileMovementHandler(FileSystemEventHandler):
 
     def on_created(self, event):
        
         name, extension = os.path.splitext(event.src_path)       
-        time.sleep(1)
+        
         print("name :" + name)
         print("extension :" + extension)
 
 
 
-# Initialize event handler
+# Initialize Event Handler Class
 event_handler = FileMovementHandler()
-
 
 # Initialize Observer
 observer = Observer()
 
+# Schedule the Observer
 observer.schedule(event_handler, from_dir, recursive=True)
 
 
 # Start the Observer
 observer.start()
 
-try:
-    while True:
-        time.sleep(2)
-        print("running...")
-except KeyboardInterrupt:
-    print("stopped")
-    observer.stop()
-
-observer.join()
+while True:
+    time.sleep(2)
+    print("running...")
